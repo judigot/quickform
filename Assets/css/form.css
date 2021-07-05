@@ -1,0 +1,121 @@
+/*====================FIELD BUTTONS====================*/
+.title {
+    font-weight: bold;
+}
+.field-container {
+    position: relative;
+}
+.editFieldTrigger,
+.removeField {
+    opacity: 0.8;
+    /*color: #CCCCCC !important;*/
+    top: 26% !important;
+    font-size: 26px;
+    position: absolute;
+}
+.editFieldTrigger {
+    color: #62ACED;
+    left: 6% !important;
+}
+.removeField {
+    color: #F0817B;
+    left: 90% !important;
+}
+/*====================FIELD BUTTONS====================*/
+/*====================SCROLL BAR====================*/
+.modal::-webkit-scrollbar {
+    width: 0%;
+}
+/*====================SCROLL BAR====================*/
+hr {
+    border-color: #DDDDDD;
+}
+/*Hidden*/
+#fieldSource, .removeAllFields {
+    display: none;
+}
+/*Hidden*/
+/*Color*/
+.removeAllFields {
+    color: #AAAAAA;
+}
+.addNewOption {
+    color: #B2BA3A;
+}
+.removeDropdownOption {
+    color: #F0817B;
+}
+/*Color*/
+/*Font Size*/
+.removeAllFields {
+    font-size: 10px;
+}
+.addField {
+    color: #62ACED;
+    width: 100px;
+    font-size: 12px;
+}
+/*Font Size*/
+/*Display*/
+.editTextFieldInput {
+    display: block;
+}
+.addField {
+    display: inline-block;
+}
+/*Display*/
+/*Position*/
+.module, .modal-body, .editTextFieldInput, .editRange, #newDropdownOption, #oldOptions span input {
+    text-align: center;
+}
+/*Position*/
+/*Spacing*/
+.editTextFieldInput {
+    margin: auto;
+}
+.module, .addField {
+    margin: 0%;
+    padding: 0%;
+}
+.addField {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+/*Spacing*/
+.addField, .editFieldTrigger, .removeField, .removeAllFields, .addNewOption, .removeDropdownOption {
+    cursor: pointer;
+}
+.modal-content {
+    width: 500px;
+    margin: auto;
+}
+#formPreview,
+#formViewer {
+    overflow-y: scroll;
+    max-height: 300px;
+}
+#formPreview div {
+    cursor: move;
+}
+#formPreview div,
+#formViewer div {
+    padding-bottom: 5px;
+    border: 1px solid #62ACED;
+    border-style: none solid none solid;
+    transition: border-radius 1s;
+}
+#formPreview div:only-child,
+#formViewer div:only-child {
+    border-style: solid;
+    border-radius: 10px !important;
+}
+#formPreview div:first-child:not(:only-child),
+#formViewer div:first-child:not(:only-child) {
+    border-style: solid solid none solid;
+    border-radius: 10px 10px 0px 0px !important;
+}
+#formPreview div:last-child:not(:only-child),
+#formViewer div:last-child:not(:only-child) {
+    border-style: none solid solid solid;
+    border-radius: 0px 0px 10px 10px !important;
+}

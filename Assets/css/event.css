@@ -1,0 +1,76 @@
+/*====================EVENT MAIN FIELDS====================*/
+#regEventTitle {
+    margin-right: 4px;
+    font-style: italic;
+}
+#regEndTime {
+    margin-right: 3px;
+}
+.event-main-fields {
+    width: 100%;
+}
+.event-main-fields > input {
+    width: 360px !important;
+}
+.event-main-fields select {
+    width: 25% !important;
+}
+.event-main-fields .timepicker {
+    margin-top: 10px;
+    width: 174px !important;
+}
+/*====================EVENT MAIN FIELDS====================*/
+#eventTypeLabel {
+    font-weight: bold;
+}
+.event-type-switch {
+    background-color: #62ACED !important;
+}
+.enable-switch {
+    background-color: #CCCCCC !important;
+}
+input:checked + .enable-switch {
+    background-color: #62ACED !important;
+}
+.field-option {
+    position: absolute;
+    cursor: pointer;
+}
+.item-preview,
+#passVisibility {
+    margin: 5px;
+}
+#passVisibility {
+    margin-top: 8px;
+}
+#editEmailTrigger {
+    top: 5px;
+    position: relative;    
+    padding-left: 5px;
+}
+#emailSubject,
+#emailBody {
+    width: 100%;
+    text-align: left;
+    margin: 0%;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+#emailSubject {
+    font-weight: bold;
+    background-color: #EEEEEE;
+}
+#emailBody {
+    height: 300px;
+    text-align: justify;
+    overflow-y: scroll;
+    background-color: white;
+}
+#emailContainer > hr {
+    margin: 0%;
+    padding: 0%;
+}
+.modal::-webkit-scrollbar {
+    width: 0%;
+}

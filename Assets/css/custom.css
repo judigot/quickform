@@ -1,0 +1,227 @@
+/*
+Neutrals: #333333, #666666, #999999, #AAAAAA, #BBBBBB, #CCCCCC, #DDDDDD, #EEEEEE
+*/
+html, body {
+    /*====================DEFAULTS====================*/
+    /*Override browser defaults*/
+    padding: 0%;
+    margin: 0%;
+    /*Override browser defaults*/
+    /*General dimensions*/
+    /*height: 100%;*/
+    width: 100%;
+    /*General dimensions*/
+    /*General font color*/
+    color: rgba(0, 0, 0, 0.8);
+    /*General font color*/
+    /*General font family*/
+    font-family: "Segoe UI";
+    /*General font family*/
+    /*Remove default browser scroll/Replace with "overflow-y: scroll" on the main content (see Quickform/home)*/
+    /*overflow-y: hidden;*/
+    /*Remove default browser scroll/Replace with "overflow-y: scroll" on the main content (see Quickform/home)*/
+    /*====================DEFAULTS====================*/
+}
+select {
+    outline: none;
+    background-color: #ABD0F0;
+    border: 1px solid #62ACED;
+    border-radius: 10px !important;
+}
+/*====================NOTIFY.JS====================*/
+.notifyjs-bootstrap-base {
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border: none;
+    text-shadow: none;
+    font-weight: normal;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px !important;
+}
+/*====================NOTIFY.JS====================*/
+/*====================Toggle Switch====================*/
+/*Size*/
+.switch {
+    zoom: 50%;
+}
+/*Transition Duration*/
+.slider, .slider:before {
+    transition: .5s;
+}
+/*True*/
+input:checked + .slider {
+    background-color: #B2BA3A;
+}
+/*True Transition*/
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+/*False*/
+.slider {
+    background-color: #F0817B;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    position: absolute;
+}
+/*Middle Switch*/
+.slider:before {
+    content: "";
+    background-color: white;
+    box-shadow: 0px 0px 5px 1px white;
+    bottom: 4px;
+    left: 4px;
+    height: 26px;
+    width: 26px;
+    position: absolute;
+}
+/*Container*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+/*Middle Switch Radius*/
+.slider.round:before {
+    border-radius: 50% !important;
+}
+/*Container Radius*/
+.slider.round {
+    border-radius: 50px !important;
+}
+/*====================Toggle Switch====================*/
+.tooltip-arrow {
+    display: none;
+}
+.tooltip-inner {
+    color: black !important;
+    border-radius: 5px !important;
+    background-color: white !important;
+    border: 1px solid black !important;
+}
+body {
+    display: none;
+    font-size: 15px;
+}
+* {
+    border-radius: 0 !important;
+}
+*:not(input) {
+    user-select: none;
+}
+::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #DDDDDD;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #AAAAAA;
+}
+input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #62ACED;
+}
+input::selection {
+    background-color: #EEEEEE;
+}
+/*====================CONTEXT MENU====================*/
+.context-menu-icon::before,
+.context-menu-icon.context-menu-icon--fa::before {
+    color: red;
+}
+.context-menu-item.context-menu-hover {
+    background-color: #62ACED;
+}
+/*====================CONTEXT MENU====================*/
+/*====================Bootstrap====================*/
+.btn,
+.btn:focus {
+    color: #62ACED;
+    border: 2px solid #62ACED;
+    outline: none !important;
+    background-color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.btn:hover {
+    color: white;
+    background-color: #62ACED;
+}
+.btn:active {
+    box-shadow: inset 0 5px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.green,
+.green:focus {
+    color: #B2BA3A;
+    border-color: #B2BA3A;
+}
+.green:hover {
+    color: white;
+    background-color: #B2BA3A;
+}
+.in {
+    background-color: transparent;
+}
+.modal {
+    margin-top: -10px;
+}
+.modal-dialog {
+    width: 500px;
+    border-radius: 10px 10px 0 0 !important;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+}
+.title-bar {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    height: 30px;
+    padding: 5px;
+    border-radius: 10px 10px 0 0 !important;
+    background-color: rgba(92, 172, 237, 0.9);
+}
+.title-bar-controls {
+    float: right;
+    cursor: pointer;
+}
+.modal-header {
+    text-align: center;
+    border-color: #DDDDDD;
+}
+.modal-content {
+    border: none;
+    box-shadow: none;
+    background-color: rgba(255, 255, 255,0.9);
+}
+.modal-footer {
+    border-color: #DDDDDD;
+}
+/*====================Bootstrap====================*/
+@font-face {
+    font-family: "Digital";
+    src: url(../fonts/digital-7.ttf);
+}
+.fieldSource {
+    display: none;
+}
+#list-error {
+    color: #AAAAAA;
+    text-align: center;
+    width: calc(100vw - 20px);
+}
+.list-error-title {
+    color: #62ACED;
+}
+.quickform {
+    width: 100%;
+    box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.2);
+}
+.quickform-nav {
+    width: 40%;
+}

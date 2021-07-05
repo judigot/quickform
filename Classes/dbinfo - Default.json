@@ -1,0 +1,15 @@
+{
+    "username": "root",
+    "password": "",
+    "host": "localhost",
+    "database": [
+        "appjudigot_quickform"
+    ],
+    "table": [
+        "app_certificate",
+        "app_event",
+        "app_form",
+        "app_list",
+        "app_user"
+    ]
+}

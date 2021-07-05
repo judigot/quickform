@@ -1,0 +1,67 @@
+body {
+    background-image: url("../../Assets/images/bg5-src.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-attachment: fixed;
+}
+.event-title {
+    color: #62ACED;
+    font-size: 20px;
+    font-style: italic;
+}
+#modal-backdrop, #modal-body {
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+}
+#modal-backdrop {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#modal-body {
+    padding: 50px;
+    width: 400px;
+    background-color: white;
+    transition: all 0.5s;
+    text-align: center;
+}
+.field {
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #CCCCCC;
+    transition: all 0.5s;
+}
+.field:focus {
+    outline: none;
+    border-color: #62ACED;
+}
+#login-result {
+    color: #F0817B;
+}
+#login-result > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#verify-pass-button {
+    margin-top: 10px;
+    width: 100%;
+}
+@media (max-width: 640px) {
+    #modal-body {
+        background-color: rgba(255, 255, 255, 0.8);
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        transform: none;
+    }
+}

@@ -1,0 +1,29 @@
+/*====================TIME FIELD====================*/
+.time-data {
+    font-weight: bold;
+}
+.time-in {
+    color: #62ACED;
+}
+.time-out {
+    color: #B2BA3A;
+}
+.time-switch {
+    background-color: #CCCCCC !important;
+}
+input:checked + .time-switch {
+    background-color: #62ACED !important;
+}
+.signed-out {
+    background-color: #B2BA3A !important;
+}
+.switch {
+    transition: transform 1s;
+}
+.rotate180 {
+    transform: rotate(-180deg);
+}
+.rotate360 {
+    transform: rotate(-360deg);
+}
+/*====================TIME FIELD====================*/

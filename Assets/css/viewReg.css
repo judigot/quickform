@@ -1,0 +1,32 @@
+.fieldLabel {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+}
+.fieldLabel::after {
+    content: ":";
+}
+.fieldContainer select {
+    margin-top: 10px;
+}
+.fieldContainer .switch {
+    margin-top: 20px !important;
+}
+.fieldContainer {
+    zoom: 150%;
+}
+#preregistrationContainer input,
+#preregistrationContainer select {
+    width: 100%;
+}
+#preregistrationContainer hr {
+    border-style: dashed;
+    border-color: #CCCCCC;
+}
+#preregistrationContainer {
+    margin: auto;
+    padding: 20px;
+    max-width: 1000px;
+    border: 1px solid #62ACED;
+    border-radius: 20px !important;
+}

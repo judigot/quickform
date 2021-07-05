@@ -1,0 +1,81 @@
+#attendanceTable {
+    width: 100% !important;
+}
+/*style=''*/
+.fa-certificate {
+    color: #EDB762;
+    border: none;
+    outline: none;
+    font-size: 50px;
+    transition: transform 1s;
+    background-color: transparent;
+}
+/*==========PAGINATION BUTTONS==========*/
+.dataTables_wrapper .dataTables_paginate .paginate_button,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #62ACED !important;
+    width: 100px;
+    border: 1px solid white !important;
+    border-radius: 20px !important;
+    outline: none !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:not(.disabled):active,
+.dataTables_wrapper .dataTables_paginate .paginate_button:not(.disabled):hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    color: white !important;
+    outline: none !important;
+    background: #62ACED !important;
+    box-shadow: none !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #CCCCCC !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+    color: white !important;
+    color: #62ACED !important;
+    border-color: #62ACED !important;
+}
+/*==========PAGINATION BUTTONS==========*/
+.dataTables_length select {
+    text-align-last: center !important;
+}
+.dataTables_info,
+.dataTables_paginate {
+    zoom: 80% !important;
+}
+.dataTables_info {
+    font-style: italic;
+}
+.preloader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.time-data {
+    display: block;
+}
+table {
+    width: 100%;
+    background-color: #62ACED;
+}
+table {
+    border: none !important;
+    border-radius: 10px !important;
+}
+tbody tr:hover {
+    background-color: #EEEEEE !important;
+}
+th {
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    border: none !important;
+}
+.paginate_button current {
+    background-color: red !important;
+}
+input {
+    background-color: transparent;
+}

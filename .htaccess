@@ -1,0 +1,59 @@
+RewriteEngine on
+#========================================DEFAULT========================================#
+#NC makes the rule non case sensitive
+#L makes this the last rule that this specific condition will match
+
+#Secure .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+#Deny access to file types
+#<FilesMatch "\.(css|js|txt)">
+#    Order allow,deny
+#    Deny from all
+#</FilesMatch>
+<FilesMatch "dbinfo.(json)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+#Remove server signature
+ServerSignature Off
+
+#Unlist all file types from index
+IndexIgnore *
+
+#Parse custom file type
+AddType application/x-httpd-php .sample
+
+#====================PHP Values====================#
+php_value date.timezone "Asia/Manila"
+php_value post_max_size 20M
+php_value max_file_uploads 20M
+php_value upload_max_filesize 20M
+#====================PHP Values====================#
+
+#====================Error Pages====================#
+ErrorDocument 400 "<!DOCTYPE html><html lang='en'><head><style>#error{user-select:none;color:#DDD;font-size:150px;font-family:Trebuchet MS;top:50%;left:50%;position:fixed;transform:translate(-50%, -50%)}</style> <script>document.addEventListener('contextmenu',event=>event.preventDefault());</script> </head><body><div id='error'> <span>Error 400</span></div></body></html>"
+ErrorDocument 401 "<!DOCTYPE html><html lang='en'><head><style>#error{user-select:none;color:#DDD;font-size:150px;font-family:Trebuchet MS;top:50%;left:50%;position:fixed;transform:translate(-50%, -50%)}</style> <script>document.addEventListener('contextmenu',event=>event.preventDefault());</script> </head><body><div id='error'> <span>Error 401</span></div></body></html>"
+ErrorDocument 403 "<!DOCTYPE html><html lang='en'><head><style>#error{user-select:none;color:#DDD;font-size:150px;font-family:Trebuchet MS;top:50%;left:50%;position:fixed;transform:translate(-50%, -50%)}</style> <script>document.addEventListener('contextmenu',event=>event.preventDefault());</script> </head><body><div id='error'> <span>Error 403</span></div></body></html>"
+ErrorDocument 404 "<!DOCTYPE html><html lang='en'><head><style>#error{user-select:none;color:#DDD;font-size:150px;font-family:Trebuchet MS;top:50%;left:50%;position:fixed;transform:translate(-50%, -50%)}</style> <script>document.addEventListener('contextmenu',event=>event.preventDefault());</script> </head><body><div id='error'> <span>Error 404</span></div></body></html>"
+ErrorDocument 504 "<!DOCTYPE html><html lang='en'><head><style>#error{user-select:none;color:#DDD;font-size:150px;font-family:Trebuchet MS;top:50%;left:50%;position:fixed;transform:translate(-50%, -50%)}</style> <script>document.addEventListener('contextmenu',event=>event.preventDefault());</script> </head><body><div id='error'> <span>Error 500</span></div></body></html>"
+#====================Error Pages====================#
+
+#Remove .php extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+#Clean URL variables
+#RewriteRule ^page/([a-zA-Z0-9_-]+) page.php?var1=$1 [NC,L]
+#RewriteRule ^page/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+) page.php?var1=$1&var2=$2 [NC,L]
+
+#========================================DEFAULT========================================#
+RewriteRule ^home/ home.php [NC,L]
+RewriteRule ^home/([a-zA-Z0-9_-]+) home.php?content=$1 [NC,L]
+RewriteRule ^list/([0-9]+) list.php?listId=$1 [NC,L]
+RewriteRule ^event/([0-9]+) event.php?eventId=$1 [NC,L]
+RewriteRule ^report/([0-9]+) report.php?eventId=$1 [NC,L]
