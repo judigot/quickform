@@ -69,15 +69,15 @@ if ($_POST || $_FILES) {
                                 array_push($listResult[$i], $in, $out);
                             }
                         }
-                        $columnNames = [];
+                        $csvValues = [];
                         foreach ($listResult as $Value) {
                             //MySQL Data to CSV
-                            array_push($columnNames, array_values($Value));
+                            array_push($csvValues, array_values($Value));
                         }
                         die(json_encode(
                             [
                                 "eventName" => $eventName,
-                                "data" => $columnNames
+                                "data" => $csvValues
                             ]
                         ));
                     }
