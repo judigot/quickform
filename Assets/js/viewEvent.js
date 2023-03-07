@@ -44,7 +44,7 @@ $(function () {
                         array
                         .map((value) => {
                             if(value){
-                                return value.includes(`"`) ? `"${value.replace(/"/g, `""`)}"` : value;
+                                return (value.includes(`"`) || value.includes(`,`)) ? `"${value.replace(/"/g, `""`)}"` : value;
                             } else {
                                 return null;
                             }
