@@ -30,7 +30,7 @@ if (isset($_POST["createList"])) {
     //=====Insert values to table=====//
     $SQL = "INSERT INTO `$tableName` VALUES ";
     for ($i = 0; $i < $allowedRowSize; $i++) {
-        $SQL = $SQL . "('', ";
+        $SQL = $SQL . "(NULL, ";
         for ($j = 0; $j < $allowedColumnSize; $j++) {
             $SQL = $SQL . "$defaultValue, ";
         }
