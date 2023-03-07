@@ -11,6 +11,80 @@ if ($_POST || $_FILES) {
     $Connection = Database::Connect($Host, $DatabaseName, $Username, $Password);
 
     if ($Connection) {
+        if (isset($_POST["eventID"])) {
+            $tableName = $dataColumnPrefix . $_POST["eventID"];
+            $eventID = isset($_POST["eventID"]) ? $_POST["eventID"] : false;
+            $Result = Database::read($Connection, "SHOW TABLES LIKE '$tableName';");
+            $Result = $Result ? $Result[0][array_keys($Result[0])[0]] : null;
+            if($Result) {
+                $chronological = false;
+                // $eventListResult = Database::read($Connection, "SELECT `event_list`, `event_name` FROM `$eventMasterTableName` WHERE `event_id`='$eventID';");
+                $eventListResult = Database::read($Connection, "SELECT `event_list`, `event_name`, `F`.`form_content` FROM `$eventMasterTableName` AS `E` JOIN `$formMasterTableName` as `F` ON `E`.`event_form` = `F`.`form_id` WHERE `event_id`='$eventID';");
+                $eventList = $eventListResult[0][array_keys($eventListResult[0])[0]];
+                $eventName = $eventListResult[0][array_keys($eventListResult[0])[1]];
+                if ($chronological) {
+                    $Result = Database::read($Connection, "SELECT * FROM `$tableName` WHERE `q_col_1` IS NOT NULL ORDER BY `q_col_1` ASC;");
+                } else {
+                    $Result = Database::read($Connection, "SELECT * FROM `$tableName` WHERE `q_col_1` IS NOT NULL;");
+                }
+
+                $tableName = $listColumnPrefix . $eventList;
+                $listResult = Database::read($Connection, "SELECT * FROM `$tableName` WHERE `row_id`='1';");
+
+                if ($listResult) {
+                    $ColumnNames = array_keys($listResult[0]);
+                    $maxColumnCount = 0;
+                    for ($j = 1; $j < sizeof($listResult[0]); $j++) {
+                        if ($listResult[0][$ColumnNames[$j]] != "") {
+                            $maxColumnCount++;
+                        }
+                    }
+                    $maxDataCount = (int) Database::read($Connection, "SELECT COUNT(*) AS `maxRowCount` FROM `$tableName`;")[0]["maxRowCount"];
+
+                    $attended = array();
+                    foreach ($Result as $Value) {
+                        array_push($attended, $Value[array_keys($Result[0])[0]] + 1);
+                    }
+                    $activeRows = "'" . implode("', '", $attended) . "'";
+                    $columns = null;
+                    for ($i = 0; $i < $maxColumnCount; $i++) {
+                        $columns .= "`$systemColumnPrefix" . ($i + 1) . "`, ";
+                    }
+                    $columns = substr($columns, 0, -2);
+                    $tableName = $listColumnPrefix . $eventList;
+                    $formFields = json_decode($eventListResult[0]["form_content"]);
+                    if ($chronological) {
+                        $listResult = Database::read($Connection, "SELECT `row_id`, $columns FROM `$tableName` WHERE `row_id` IN (1, $activeRows) ORDER BY FIELD (`row_id`, $activeRows) ASC;");
+                    } else {
+                        $listResult = Database::read($Connection, "SELECT `row_id`, $columns FROM `$tableName` WHERE `row_id` IN (1, $activeRows);");
+                    }
+                    if ($listResult) {
+                        for ($i = 0; $i < sizeof($listResult); $i++) {
+                            array_shift($listResult[$i]);
+                            if ($i == 0) {
+                                array_push($listResult[$i], "In", "Out");
+                            } else {
+                                $time = json_decode($Result[$i - 1]["q_col_1"], true);
+                                $in = isset($time[0]["in"]) ? $time[0]["in"] : null;
+                                $out = isset($time[1]["out"]) ? $time[1]["out"] : null;
+                                array_push($listResult[$i], $in, $out);
+                            }
+                        }
+                        $columnNames = [];
+                        foreach ($listResult as $Value) {
+                            //MySQL Data to CSV
+                            array_push($columnNames, array_values($Value));
+                        }
+                        die(json_encode(
+                            [
+                                "eventName" => $eventName,
+                                "data" => $columnNames
+                            ]
+                        ));
+                    }
+                }
+            }
+        }
         if (isset($_POST["eventId"])) {
             $tableName = $dataColumnPrefix . $_POST["eventId"];
             $eventData = isset($_POST["eventId"]) ? $_POST["eventId"] : false;
