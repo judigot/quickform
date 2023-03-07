@@ -131,12 +131,12 @@ if (isset($listId) && $Connection != null) {
                                         <img src="Assets/images/info/2.png" alt=""/>
                                     </li>
                                     <hr>
-                                    <li>Columns can be rearranged according to your liking<br>
+                                    <li>Rearrange columns<br>
                                         <img src="Assets/images/info/3.gif" alt=""/>
                                     </li>
                                 </ul>
                                 <br>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;That's pretty much all you need to know. Quick isn't it?</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;That's pretty much all you need to know. Quick, isn't it?</p>
                             </div>
                         </div>
                         <div class="modal-footer">
