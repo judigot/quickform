@@ -18,7 +18,6 @@ if ($_POST || $_FILES) {
             $Result = $Result ? $Result[0][array_keys($Result[0])[0]] : null;
             if($Result) {
                 $chronological = false;
-                // $eventListResult = Database::read($Connection, "SELECT `event_list`, `event_name` FROM `$eventMasterTableName` WHERE `event_id`='$eventID';");
                 $eventListResult = Database::read($Connection, "SELECT `event_list`, `event_name`, `F`.`form_content` FROM `$eventMasterTableName` AS `E` JOIN `$formMasterTableName` as `F` ON `E`.`event_form` = `F`.`form_id` WHERE `event_id`='$eventID';");
                 $eventList = $eventListResult[0][array_keys($eventListResult[0])[0]];
                 $eventName = $eventListResult[0][array_keys($eventListResult[0])[1]];
