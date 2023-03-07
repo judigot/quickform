@@ -179,7 +179,7 @@ if ($_POST || $_FILES) {
                 $SQL = substr($SQL, 0, -2) . ");";
                 //=====Create table=====//
                 //=====Insert values to table=====//
-                $SQL = $SQL . "LOAD DATA LOCAL INFILE '" . str_replace("\\", "/", $_FILES["listContent"]["tmp_name"]) . "' INTO TABLE `$tableName` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY  '\"' LINES TERMINATED BY '\r\n' STARTING BY '' (";
+                $SQL = $SQL . "SET GLOBAL local_infile = 'ON'; LOAD DATA LOCAL INFILE '" . str_replace("\\", "/", $_FILES["listContent"]["tmp_name"]) . "' INTO TABLE `$tableName` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' STARTING BY '' (";
                 for ($i = 0; $i < $allowedColumnSize; $i++) {
                     $SQL = $SQL . "$systemColumnPrefix" . ($i + 1) . ", ";
                 }
