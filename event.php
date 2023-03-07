@@ -58,11 +58,7 @@ if ($Result) {
                     if (isset($_SESSION["user"]) && $eventType == "attendance") {
                         ?>
                         <div class="actions-container">
-                            <form class="action-children" method="POST" action="Classes/process.php">
-                                <input type="text" name="eventId" value="<?php echo $_GET["eventId"]; ?>" hidden="true">
-                                <input type="text" name="maxColumnCount" value="" hidden="true">
-                                <button type="submit" data-original-title="Download report" class="attendance-action download-report"><i class="fa fa-download"></i></button>
-                            </form>
+                            <button type="button" id="downloadReport" data-event-id="<?php echo $_GET["eventId"]; ?>" data-original-title="Download report" class="attendance-action download-report"><i class="fa fa-download"></i></button>
                             <button type="button" data-original-title="End event" class="fa fa-hourglass-half action-children attendance-action end-event"></button>
                             <?php
                             if ($endTime < $currentTime) {
