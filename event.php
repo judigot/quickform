@@ -91,14 +91,14 @@ if ($Result) {
                                 //=====Insert list=====//
                                 //=====Create table=====//
                                 $regListResult = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
-                                $SQL = "CREATE TABLE `{$regListResult[0]["LAST_INSERT_ID()"]}` (row_id INT(11) PRIMARY KEY AUTO_INCREMENT, ";
+                                $SQL = "CREATE TABLE `list_{$regListResult[0]["LAST_INSERT_ID()"]}` (row_id INT(11) PRIMARY KEY AUTO_INCREMENT, ";
                                 for ($i = 0; $i < $allowedColumnSize; $i++) {
                                     $SQL = $SQL . "`$systemColumnPrefix" . ($i + 1) . "` VARCHAR(255) NULL, ";
                                 }
                                 $SQL = substr($SQL, 0, -2) . ");";
                                 //=====Create table=====//
                                 //=====Insert values to table=====//
-                                $SQL = $SQL . "INSERT INTO `{$regListResult[0]["LAST_INSERT_ID()"]}` VALUES ('', ";
+                                $SQL = $SQL . "INSERT INTO `list_{$regListResult[0]["LAST_INSERT_ID()"]}` VALUES (NULL, ";
                                 $fieldIndex = 0;
                                 foreach ($form as $value) {
                                     $SQL = $SQL . "{$Connection->quote(Tools::utf8Encode($value["title"]))}, ";

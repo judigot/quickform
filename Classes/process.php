@@ -214,8 +214,7 @@ if ($_POST || $_FILES) {
                 for ($i = 0; $i < sizeof($Data); $i++) {
                     array_push($Column, $systemColumnPrefix . ($i + 1));
                 }
-                print_r($Column);
-                Database::create($Connection, $_POST["data"]["table"], $Column, $Data);
+                Database::create($Connection, "list_" . $_POST["data"]["table"], $Column, $Data);
             }
             if ($_POST['create'] == "insertEvent") {
                 $eventPassHash = $_POST["data"]["password"] ? Tools::hashPassword($_POST["data"]["password"]) : null;
