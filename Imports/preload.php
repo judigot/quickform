@@ -12,14 +12,14 @@ if (in_array($currentPage, $sharedPages) || in_array($currentPage, $userPages)) 
     // If the user lands on either shared or user pages
     if (in_array($currentPage, $userPages) && !in_array($currentPage, $sharedPages)) {
         // If the user lands on a user page but isn't logged in
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION["user-quickform"])) {
             header("Location: {$projectRoot}login");
             exit();
         }
     }
 } else {
     // If the user lands on a public page but is logged in
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION["user-quickform"])) {
         header("Location: {$projectRoot}home");
         exit();
     }

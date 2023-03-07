@@ -27,7 +27,7 @@ if ($Result) {
                 <script src="Vendor/Plugins/FlipClock-master/flipclock.js" type="text/javascript"></script>
                 <?php
             }
-            if ($startTime < $currentTime && $eventPassword == "true" && isset($_SESSION["user"]) && $_SESSION["user"]["user_id"] == $Result[0]["user_id"]) {
+            if ($startTime < $currentTime && $eventPassword == "true" && isset($_SESSION["user-quickform"]) && $_SESSION["user-quickform"]["user_id"] == $Result[0]["user_id"]) {
                 ?>
                 <link href="Assets/css/viewEventPass.css" rel="stylesheet" type="text/css"/>
                 <?php
@@ -51,11 +51,11 @@ if ($Result) {
         <body data-event-id="<?php echo $_GET["eventId"]; ?>" data-event-name="<?php echo $Result[0]["event_name"]; ?>" data-event-type="<?php echo $Result[0]["event_type"]; ?>" data-special-form-content='<?php echo $specialForm; ?>' data-current-time="<?php echo $currentTime; ?>" data-start-time="<?php echo $startTime; ?>" data-end-time="<?php echo $endTime; ?>" data-event-status="<?php echo $Result[0]["event_status"]; ?>">
             <?php
             if ($startTime < $currentTime) {
-                if ($Result[0]["event_status"] == "active" || (isset($_SESSION["user"]) && $_SESSION["user"]["user_id"] == $Result[0]["user_id"])) {
+                if ($Result[0]["event_status"] == "active" || (isset($_SESSION["user-quickform"]) && $_SESSION["user-quickform"]["user_id"] == $Result[0]["user_id"])) {
                     ?>
                     <h1 id="eventTitle" class="event-label registration"><?php echo $Result[0]["event_name"]; ?></h1>
                     <?php
-                    if (isset($_SESSION["user"]) && $eventType == "attendance") {
+                    if (isset($_SESSION["user-quickform"]) && $eventType == "attendance") {
                         ?>
                         <div class="actions-container">
                             <button type="button" id="downloadReport" data-event-id="<?php echo $_GET["eventId"]; ?>" data-original-title="Download report" class="attendance-action download-report"><i class="fa fa-download"></i></button>
@@ -86,11 +86,11 @@ if ($Result) {
 
                                 //=====Insert list=====//
                                 $Column = array("user_id", "event_id", "list_name");
-                                $Data = array($_SESSION["user"]["user_id"], $Result[0]["event_id"], $defaultName);
+                                $Data = array($_SESSION["user-quickform"]["user_id"], $Result[0]["event_id"], $defaultName);
                                 Database::create($Connection, $listMasterTableName, $Column, $Data);
                                 //=====Insert list=====//
                                 //=====Create table=====//
-                                $regListResult = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
+                                $regListResult = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}'");
                                 $SQL = "CREATE TABLE `list_{$regListResult[0]["LAST_INSERT_ID()"]}` (row_id INT(11) PRIMARY KEY AUTO_INCREMENT, ";
                                 for ($i = 0; $i < $allowedColumnSize; $i++) {
                                     $SQL = $SQL . "`$systemColumnPrefix" . ($i + 1) . "` VARCHAR(255) NULL, ";
@@ -311,7 +311,7 @@ if ($Result) {
                     }
                     ?>
                     <?php
-                } else if ((!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION["user"]["user_id"] != $Result[0]["user_id"])) && $Result[0]["event_status"] == "inactive") {
+                } else if ((!isset($_SESSION["user-quickform"]) || (isset($_SESSION["user-quickform"]) && $_SESSION["user-quickform"]["user_id"] != $Result[0]["user_id"])) && $Result[0]["event_status"] == "inactive") {
                     ?>
                     <div id="list-error">
                         <h1 class="list-error-title">The event has ended.</h1>

@@ -3,6 +3,7 @@
 <html lang="en">
 
     <head>
+        <!--  -->
         <?php include 'Imports/top.php'; ?>
         <link href="Assets/css/animation.css" rel="stylesheet" type="text/css"/>
         <link href="Assets/css/event.css" rel="stylesheet" type="text/css"/>

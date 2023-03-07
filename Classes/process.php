@@ -167,11 +167,11 @@ if ($_POST || $_FILES) {
             if (in_array($fileActualExt, $allowed)) {
                 //=====Insert list=====//
                 $Column = array("user_id", "list_name");
-                $Data = array($_SESSION["user"]["user_id"], $listName);
+                $Data = array($_SESSION["user-quickform"]["user_id"], $listName);
                 Database::create($Connection, $listMasterTableName, $Column, $Data);
                 //=====Insert list=====//
                 //=====Create table=====//
-                $Result = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
+                $Result = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}'");
                 $tableName = $listColumnPrefix . $Result[0]["LAST_INSERT_ID()"];
                 $SQL = "CREATE TABLE `$tableName` (row_id INT(11) PRIMARY KEY AUTO_INCREMENT, ";
                 for ($i = 0; $i < $allowedColumnSize; $i++) {
@@ -220,16 +220,16 @@ if ($_POST || $_FILES) {
                 $eventPassHash = $_POST["data"]["password"] ? Tools::hashPassword($_POST["data"]["password"]) : null;
                 $Column = array("user_id", "event_type", "event_name", "event_password", "event_form", "event_list", "event_email", "start_time", "end_time");
                 if ($_POST["data"]["type"] == "registration") {
-                    $Data = array($_SESSION["user"]["user_id"], $_POST["data"]["type"], $_POST["data"]["eventName"], $eventPassHash, $_POST["data"]["form"], null, null, $_POST["data"]["startTime"], $_POST["data"]["endTime"]);
+                    $Data = array($_SESSION["user-quickform"]["user_id"], $_POST["data"]["type"], $_POST["data"]["eventName"], $eventPassHash, $_POST["data"]["form"], null, null, $_POST["data"]["startTime"], $_POST["data"]["endTime"]);
                 } else {
-                    $Data = array($_SESSION["user"]["user_id"], $_POST["data"]["type"], $_POST["data"]["eventName"], $eventPassHash, $_POST["data"]["specialForm"], $_POST["data"]["list"], $_POST["data"]["email"], $_POST["data"]["startTime"], $_POST["data"]["endTime"]);
+                    $Data = array($_SESSION["user-quickform"]["user_id"], $_POST["data"]["type"], $_POST["data"]["eventName"], $eventPassHash, $_POST["data"]["specialForm"], $_POST["data"]["list"], $_POST["data"]["email"], $_POST["data"]["startTime"], $_POST["data"]["endTime"]);
                 }
                 Database::create($Connection, $eventMasterTableName, $Column, $Data);
             }
             if ($_POST['create'] == "insertForm") {
                 $Column = array("user_id", "form_name", "form_content");
                 $formName = $_POST["data"]["formName"] ? $_POST["data"]["formName"] : "Untitled form";
-                $Data = array($_SESSION["user"]["user_id"], $formName, $_POST["data"]["jsonForm"]);
+                $Data = array($_SESSION["user-quickform"]["user_id"], $formName, $_POST["data"]["jsonForm"]);
                 Database::create($Connection, $formMasterTableName, $Column, $Data);
             }
         }
@@ -250,25 +250,25 @@ if ($_POST || $_FILES) {
                 echo json_encode($Data);
             }
             if ($_POST['read'] == "checkOngoingEventUpdates") {
-                $Result = Database::read($Connection, "SELECT `event_id`, `event_name`, `event_type` FROM `$eventMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}' AND ((`event_type`='attendance' AND `event_status`='active') OR (`event_type`='registration'))");
+                $Result = Database::read($Connection, "SELECT `event_id`, `event_name`, `event_type` FROM `$eventMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}' AND ((`event_type`='attendance' AND `event_status`='active') OR (`event_type`='registration'))");
                 $Data = array();
                 array_push($Data, md5(serialize($Result)), $Result);
                 echo json_encode($Data);
             }
             if ($_POST['read'] == "checkFinishedEventUpdates") {
-                $Result = Database::read($Connection, "SELECT `event_id`, `event_name`, `event_type` FROM `$eventMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}' AND (`event_type`='attendance' AND `event_status`='inactive')");
+                $Result = Database::read($Connection, "SELECT `event_id`, `event_name`, `event_type` FROM `$eventMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}' AND (`event_type`='attendance' AND `event_status`='inactive')");
                 $Data = array();
                 array_push($Data, md5(serialize($Result)), $Result);
                 echo json_encode($Data);
             }
             if ($_POST['read'] == "checkFormUpdates") {
-                $Result = Database::read($Connection, "SELECT `form_id`, `form_name`, `form_content` FROM `$formMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
+                $Result = Database::read($Connection, "SELECT `form_id`, `form_name`, `form_content` FROM `$formMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}'");
                 $Data = array();
                 array_push($Data, md5(serialize($Result)), $Result);
                 echo json_encode($Data);
             }
             if ($_POST['read'] == "checkListUpdates") {
-                $Result = Database::read($Connection, "SELECT `list_id`, `list_name` FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
+                $Result = Database::read($Connection, "SELECT `list_id`, `list_name` FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}'");
                 $Data = array();
                 array_push($Data, md5(serialize($Result)), $Result);
                 echo json_encode($Data);
@@ -281,8 +281,8 @@ if ($_POST || $_FILES) {
                 echo json_encode($Data);
             }
             if ($_POST['read'] == "formAndListDropdown") {
-                $formResult = Database::read($Connection, "SELECT * FROM `$formMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}';");
-                $listResult = Database::read($Connection, "SELECT * FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}';");
+                $formResult = Database::read($Connection, "SELECT * FROM `$formMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}';");
+                $listResult = Database::read($Connection, "SELECT * FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}';");
                 $Data = array();
                 array_push($Data, $formResult, $listResult);
                 echo json_encode($Data);
@@ -360,7 +360,7 @@ if ($_POST || $_FILES) {
                 $itemType = $_POST["data"]["itemType"];
                 Database::duplicate($Connection, getTableName($itemType, $eventMasterTableName, $formMasterTableName, $listMasterTableName), $_POST["data"]["itemType"] . "_id", $_POST["data"]["id"], $_POST["data"]["itemType"] . "_name", "Copy of ");
                 if ($_POST["data"]["itemType"] == "list") {
-                    $Result = Database::read($Connection, "SELECT `list_id` FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}' ORDER BY `list_id` DESC LIMIT 1;");
+                    $Result = Database::read($Connection, "SELECT `list_id` FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}' ORDER BY `list_id` DESC LIMIT 1;");
                     echo json_encode($Result);
                     $SQL = "CREATE TABLE `{$Result[0]["list_id"]}` LIKE `{$_POST["data"]["id"]}`; INSERT `{$Result[0]["list_id"]}` SELECT * FROM `{$_POST["data"]["id"]}`";
                     Database::execute($Connection, $SQL);
@@ -373,8 +373,8 @@ if ($_POST || $_FILES) {
             if (!empty($Result)) {
                 $Data = array();
                 if (Tools::verifyPassword($_POST["data"]["password"], $Result[0]["password"])) {
-                    $_SESSION["user"] = array("user_id" => $Result[0]["user_id"], "first_name" => $Result[0]["first_name"], "last_name" => $Result[0]["last_name"], "email" => $Result[0]["email"], "password" => $Result[0]["password"], "birthdate" => $Result[0]["birthdate"], "gender" => $Result[0]["gender"], "address" => $Result[0]["address"], "user_type" => $Result[0]["user_type"]);
-                    $_SESSION["userEmail"] = $_SESSION["user"]["email"];
+                    $_SESSION["user-quickform"] = array("user_id" => $Result[0]["user_id"], "first_name" => $Result[0]["first_name"], "last_name" => $Result[0]["last_name"], "email" => $Result[0]["email"], "password" => $Result[0]["password"], "birthdate" => $Result[0]["birthdate"], "gender" => $Result[0]["gender"], "address" => $Result[0]["address"], "user_type" => $Result[0]["user_type"]);
+                    $_SESSION["userEmail"] = $_SESSION["user-quickform"]["email"];
                     $Data[] = 0;
                 } else {
                     $Data[] = 1;
@@ -387,8 +387,8 @@ if ($_POST || $_FILES) {
         }
 
         if (isset($_POST['logoutUser'])) {
-            unset($_SESSION["user"]);
-            echo (!isset($_SESSION["user"])) ? 1 : 0;
+            unset($_SESSION["user-quickform"]);
+            echo (!isset($_SESSION["user-quickform"])) ? 1 : 0;
         }
 
         if (isset($_POST['eventFilter'])) {

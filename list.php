@@ -14,11 +14,11 @@ if (isset($_POST["createList"])) {
     $allowedRowSize = 100;
     //=====Insert list=====//
     $Column = array("user_id", "list_name");
-    $Data = array($_SESSION["user"]["user_id"], $defaultName);
+    $Data = array($_SESSION["user-quickform"]["user_id"], $defaultName);
     Database::create($Connection, $listMasterTableName, $Column, $Data);
     //=====Insert list=====//
     //=====Create table=====//
-    $Result = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION['user']["user_id"]}'");
+    $Result = Database::read($Connection, "SELECT LAST_INSERT_ID() FROM `$listMasterTableName` WHERE `user_id`='{$_SESSION["user-quickform"]["user_id"]}'");
     $tableName = $listColumnPrefix . $Result[0]["LAST_INSERT_ID()"];
     $SQL = "CREATE TABLE `$tableName` (row_id INT(11) PRIMARY KEY AUTO_INCREMENT, ";
     for ($i = 0; $i < $allowedColumnSize; $i++) {
