@@ -220,7 +220,7 @@ if ($Result) {
 
                                         // Data insertion
                                         $SQL = $SQL . "INSERT INTO `$tableName` VALUES ";
-                                        $rowTemplate = "('', ";
+                                        $rowTemplate = "(NULL, ";
                                         for ($i = 0; $i < $columnCount; $i++) {
                                             $rowTemplate = $rowTemplate . "NULL, ";
                                         }
