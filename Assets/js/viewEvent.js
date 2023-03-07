@@ -20,6 +20,51 @@ var evt_activeRows = [];
 //====================GENERAL====================//
 $(function () {
     document.title = $("body").attr("data-event-name") + " - Quickform";
+    $(document).on("click", "#downloadReport", function (e) {
+        const eventID = this.dataset.eventId;
+        $.ajax({
+            url: "Classes/process.php",
+            type: "POST",
+            dataType: "json",
+            data: {
+                eventID: eventID,
+            }
+        }).done(function (data) {
+            //====================DOWNLOAD FILE====================//
+            // Download file in javascript (client side):
+            if(data) {
+                const fileName = `Quickreport - ${data.eventName}`;
+                const fileExtension = "csv";
+                const rows = data.data;
+                let fileContent = `data:text/${fileExtension};charset=utf-8,`;
+                switch (fileExtension) {
+                case "csv":
+                    fileContent += rows
+                    .map((array) =>
+                        array
+                        .map((value) => {
+                            return `"${value.replace(/"/g, `""`)}"`;
+                        })
+                        .join(",")
+                    )
+                    .join("\n");
+                    break;
+                default:
+                    break;
+                }
+                const encodedURI = encodeURI(fileContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedURI);
+                link.setAttribute("download", `${fileName}.${fileExtension}`);
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }
+            //====================DOWNLOAD FILE====================//
+        }).fail(function (data) {
+            alert("Error downloading file");
+        });
+    });
     $("[name=maxColumnCount]").attr("value", $("#attendanceTable").attr("data-max-col"));
     if (location.href.substr(location.href.lastIndexOf('/') + 1) !== $("body").attr("data-event-name").replace(/\s/g, "-")) {
         window.history.replaceState({}, "", "event/" + $("body").attr("data-event-id") + "/" + $("body").attr("data-event-name").replace(/\s/g, "-").toLowerCase());
