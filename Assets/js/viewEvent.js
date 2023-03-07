@@ -43,7 +43,7 @@ $(function () {
                     .map((array) =>
                         array
                         .map((value) => {
-                            return `"${value.replace(/"/g, `""`)}"`;
+                            return value ? `"${value.replace(/"/g, `""`)}"` : "";
                         })
                         .join(",")
                     )
