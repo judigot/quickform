@@ -79,7 +79,7 @@ if ($Result) {
                             $regListData = Database::read($Connection, "SELECT `list_id` FROM `$listMasterTableName` WHERE `event_id`='{$Result[0]["event_id"]}';");
                             $listId;
                             if (!$regListData) {
-                                $defaultName = $Result[0]["event_name"];
+                                $defaultName = $Result[0]["event_name"] . " - data";
                                 $defaultValue = "";
                                 $allowedColumnSize = 26;
                                 $allowedRowSize = 100;
