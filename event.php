@@ -198,7 +198,7 @@ if ($Result) {
                             }
 
                             //====================EVENT DATA TABLE====================//
-                            $eventDataTable = Database::read($Connection, "SHOW TABLES LIKE '{$_GET["eventId"]}';") ? true : false;
+                            $eventDataTable = Database::read($Connection, "SHOW TABLES LIKE 'data_{$_GET["eventId"]}';") ? true : false;
                             if ($startTime < $currentTime) {
                                 if (!$eventDataTable) {
                                     echo $eventDataTable;
